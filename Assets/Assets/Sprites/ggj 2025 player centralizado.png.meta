@@ -1,25 +1,22 @@
 fileFormatVersion: 2
-guid: 932e03cdb5811ef4dafdd15e042f5bff
+guid: afeed28080f69de44ada862b9e558ed0
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -2587698357927507885
-    second: player ggj25_0
+      213: 2740582004412323241
+    second: ggj 2025 player centralizado_0
   - first:
-      213: -3405165587815939952
-    second: player ggj25_1
+      213: -2257605369091642523
+    second: ggj 2025 player centralizado_1
   - first:
-      213: -4709919190790782703
-    second: player ggj25_2
+      213: 8373937638439680028
+    second: ggj 2025 player centralizado_2
   - first:
-      213: 4962225723265208868
-    second: player ggj25_3
+      213: 2553876863333109372
+    second: ggj 2025 player centralizado_3
   - first:
-      213: 2694773461331726741
-    second: player ggj25_4
-  - first:
-      213: -5180914540621309980
-    second: player ggj25_5
+      213: 964471953301930643
+    second: ggj 2025 player centralizado_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -66,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -115,133 +112,111 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: player ggj25_0
+      name: player idle 1
       rect:
         serializedVersion: 2
-        x: 2
-        y: 1
-        width: 29
-        height: 34
+        x: 0
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 3588eddbd06a61cd0800000000000000
-      internalID: -2587698357927507885
+      spriteID: 81e4a7869ff53824387c0bfcb35b33c5
+      internalID: -1756364211
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player ggj25_1
+      name: player idle 2
       rect:
         serializedVersion: 2
-        x: 42
-        y: 1
-        width: 20
-        height: 34
+        x: 32
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 090c8d070fb6eb0d0800000000000000
-      internalID: -3405165587815939952
+      spriteID: 1c8bfb4a04a401d4a85e26e0cf596313
+      internalID: -1488605893
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player ggj25_2
+      name: player run
       rect:
         serializedVersion: 2
-        x: 77
-        y: 1
-        width: 20
-        height: 34
+        x: 64
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 111ce10437103aeb0800000000000000
-      internalID: -4709919190790782703
+      spriteID: c887b26411ea08548a658fc39927b11d
+      internalID: -418924652
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player ggj25_3
+      name: player jump 1
       rect:
         serializedVersion: 2
-        x: 107
-        y: 1
-        width: 19
-        height: 34
+        x: 96
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 422578a110e5dd440800000000000000
-      internalID: 4962225723265208868
+      spriteID: 797e8fa03335d054c8580c8e00df2311
+      internalID: 1400731684
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: player ggj25_4
+      name: player jump 2
       rect:
         serializedVersion: 2
-        x: 142
-        y: 1
-        width: 20
-        height: 30
+        x: 128
+        y: 0
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 591d3d08f22c56520800000000000000
-      internalID: 2694773461331726741
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: player ggj25_5
-      rect:
-        serializedVersion: 2
-        x: 176
-        y: 1
-        width: 22
-        height: 33
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 4e75c9acca1b918b0800000000000000
-      internalID: -5180914540621309980
+      spriteID: a756b9ddbb14b5449b9b746ea8198289
+      internalID: -1842900010
       vertices: []
       indices: 
       edges: []
@@ -250,7 +225,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 3dd091c5351b304498154af49029b7bb
+    spriteID: bd55e0274dc81e041b9f75b027116815
     internalID: 0
     vertices: []
     indices: 
@@ -260,12 +235,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      player ggj25_0: -2587698357927507885
-      player ggj25_1: -3405165587815939952
-      player ggj25_2: -4709919190790782703
-      player ggj25_3: 4962225723265208868
-      player ggj25_4: 2694773461331726741
-      player ggj25_5: -5180914540621309980
+      player idle 1: -1756364211
+      player idle 2: -1488605893
+      player jump 1: 1400731684
+      player jump 2: -1842900010
+      player run: -418924652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

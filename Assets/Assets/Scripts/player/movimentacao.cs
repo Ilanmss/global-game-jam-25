@@ -13,12 +13,15 @@ public class movimentacao : MonoBehaviour
    Pulo
        Pular alto ou baixo dependendo de segurar o bot�o        DONE   
        Coyte time - game feel                                   DONE
-       Poder pular antes de cair no ch�o - game feel            ?
+       Poder pular antes de cair no ch�o - game feel            DONE
        M�xima velocidade de queda                               DONE
        Aumentar a gravidade na queda                            DONE
     */
 
     private Rigidbody2D rb;
+    private SpriteRenderer sprite;
+    private Animator anim;
+    [SerializeField] private bool jumpAnim;
     // --------------------------------------------------- Variáveis de detecção de colisão
     [SerializeField] private LayerMask camadaChao;
     [SerializeField] private Transform posicaoPe;
@@ -45,24 +48,29 @@ public class movimentacao : MonoBehaviour
     private bool botaoPuloFoiPressionado;
     [SerializeField] private float tempoCoyote = .15f;
     [SerializeField] private float contadorCoyote;
-
-    // ---------------------------------------------------------- Variáveis relativas ao fragmento temporal
+    // ------------------------------------------------------ Variáveis de fragmentos
     [SerializeField] private LayerMask camadaFragmento;
-    private Collider2D colisorFragmentoTemporal;
-
+    private GerenteDeTempo gerenteDeTempo;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        sprite = GetComponent<SpriteRenderer>();
+        gerenteDeTempo = (GerenteDeTempo)FindFirstObjectByType(typeof(GerenteDeTempo));
     }
 
-    private void Update()
+    private void Update()   // Detecta colisões e controla o coyote time
     {
+        sprite.flipX = axisX < 0 ? true : false;
 
         DetectarColisoes();
 
         if (estaNoChao) contadorCoyote = tempoCoyote;
         else contadorCoyote -= Time.deltaTime;
+
+        anim.SetBool("run", axisX != 0);
+        anim.SetBool("estaNoChao", estaNoChao);
     }
 
     private void FixedUpdate()
@@ -73,7 +81,7 @@ public class movimentacao : MonoBehaviour
 
     // ------------------------------------------- Funções de movimentação horizontal e input
 
-    private void Mover()
+    private void Mover()    // Movimenta o jogador de acordo com a aceleração e desaceleração
     {
         if (axisX == 0)
         {
@@ -96,7 +104,11 @@ public class movimentacao : MonoBehaviour
     // -----------------------------------------------------   Funções de Pular e input
     public void PularInput(InputAction.CallbackContext ctx)
     {
-        if (ctx.started) botaoPuloFoiPressionado = true;
+        if (ctx.started)
+        {
+            botaoPuloFoiPressionado = true;
+            anim.SetTrigger("jump");
+        }
 
         if (ctx.canceled)
         {
@@ -114,7 +126,7 @@ public class movimentacao : MonoBehaviour
     }
 
     // ---------------------------------------------------Funções Auxiliares
-    private void AjusteGravidade()
+    private void AjusteGravidade()  // Aumenta a gravidade durante a queda para melhorar o game feel
     {
         if ((rb.linearVelocityY < 0 || !botaoPuloFoiPressionado) && !estaNoChao) gravidade += 50 * Time.deltaTime;
         else gravidade = gravidadeInicial;
@@ -128,26 +140,20 @@ public class movimentacao : MonoBehaviour
         colisorChao = Physics2D.OverlapBox(posicaoPe.position, new Vector2(raioPe, raioPe), 0, camadaChao);
         estaNoChao = colisorChao != null ? true : false;
         if (estaNoChao) contadorPulos = 1;
-
-        colisorFragmentoTemporal = Physics2D.OverlapCapsule(posicaoPe.position, new Vector2(1, 1), CapsuleDirection2D.Vertical, 0, camadaFragmento);
-        if (colisorFragmentoTemporal == true) TocouFragmentoTemporal();
     }
 
-    // ---------------------------------------------------- Funções de fragmento temporal
-
-    public void TocouFragmentoTemporal()
+    private void OnCollisionEnter2D(Collision2D collision) // Detecta colisão com fragmentos de tempo (verifica se a camada da colisão está na camada de fragmentos)
     {
-        Respawn();
+        if (((1 << collision.gameObject.layer) & camadaFragmento) != 0)
+        {
+            gerenteDeTempo.AumentarTempoGravado(5f);
+        }
     }
 
-    // ---------------------------------------------------- Funções Respawn
-    public Transform respawnPoint;
-    public void Respawn()
+    void OnDrawGizmos()
     {
-        velocidadeAtual = new Vector2(0, 0);
-
-        rb.transform.position = respawnPoint.position;
+        Gizmos.color = Color.red;
+        Gizmos.DrawCube(posicaoPe.position, new Vector3(raioPe, raioPe, raioPe));
     }
-
 
 }
