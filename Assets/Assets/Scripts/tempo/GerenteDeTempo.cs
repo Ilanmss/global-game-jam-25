@@ -5,16 +5,29 @@ using UnityEngine.UI;
 
 public class GerenteDeTempo : MonoBehaviour
 {
+    public static GerenteDeTempo instance;
     private bool estaVoltandoNoTempo = false;
     private float tempoGravado = 11f;   // Tempo que o jogador pode voltar no tempo
     private float tempoAcumulado = 0f;
     private float tempoParaVoltar = 3f; // Tempo que o jogador leva para voltar no tempo
     private float tempoVoltarAcumulado = 0f;
-    private float contadorTempo = 11f; // Contador para iniciar a volta no tempo
+    public float contadorTempo = 11f; // Contador para iniciar a volta no tempo
     [SerializeField] private Rigidbody2D player;
     private static List<Vector3> positions = new List<Vector3>();
 
     public Slider slidertempo;
+
+    void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            return;
+        }
+    }
 
     void FixedUpdate()  // Contador diminui e se ele passa de zero e o jogador não está voltando no tempo, ele inicia a volta no tempo
     {
@@ -82,6 +95,7 @@ public class GerenteDeTempo : MonoBehaviour
     private void IniciarVoltarNoTempo()    // Método que Inicia a volta no tempo
     {
         estaVoltandoNoTempo = true;
+        SoundManager.instance.PlayEfeito("voltar no tempo");
         player.bodyType = RigidbodyType2D.Kinematic;
         tempoVoltarAcumulado = 0f;  // Reseta o tempo acumulado quando inicia a volta
     }

@@ -25,7 +25,7 @@ public class movimentacao : MonoBehaviour
     // --------------------------------------------------- Variáveis de detecção de colisão
     [SerializeField] private LayerMask camadaChao;
     [SerializeField] private Transform posicaoPe;
-    [SerializeField] private float raioPe = 0.5f;
+    [SerializeField] private float raioPe = 0.4f;
     private Collider2D colisorChao;
     [SerializeField] private bool estaNoChao = false;
 
@@ -106,6 +106,7 @@ public class movimentacao : MonoBehaviour
     {
         if (ctx.started)
         {
+            SoundManager.instance.PlayEfeito("pular");
             botaoPuloFoiPressionado = true;
             anim.SetTrigger("jump");
         }
@@ -134,25 +135,42 @@ public class movimentacao : MonoBehaviour
         rb.gravityScale = gravidade;
     }
 
-
+    bool efeitoSonoroCair = false;
     private void DetectarColisoes()
     {
         colisorChao = Physics2D.OverlapBox(posicaoPe.position, new Vector2(raioPe, raioPe), 0, camadaChao);
         estaNoChao = colisorChao != null ? true : false;
-        if (estaNoChao) contadorPulos = 1;
+        efeitoSonoroCair = true;
+        if (estaNoChao)
+        {
+            contadorPulos = 1;
+        }
+
+
     }
+
+    [SerializeField] private LayerMask camadaMorte;
 
     private void OnCollisionEnter2D(Collision2D collision) // Detecta colisão com fragmentos de tempo (verifica se a camada da colisão está na camada de fragmentos)
     {
         if (((1 << collision.gameObject.layer) & camadaFragmento) != 0)
         {
+            SoundManager.instance.PlayEfeito("pegar fragmento");
             gerenteDeTempo.AumentarTempoGravado(5f);
+        }
+        if (((1 << collision.gameObject.layer) & camadaChao) != 0)
+        {
+            SoundManager.instance.PlayEfeito("cair no chao");
+        }
+        if (((1 << collision.gameObject.layer) & camadaMorte) != 0)
+        {
+            GerenteDeTempo.instance.contadorTempo = 0;
         }
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.yellow;
         Gizmos.DrawCube(posicaoPe.position, new Vector3(raioPe, raioPe, raioPe));
     }
 
