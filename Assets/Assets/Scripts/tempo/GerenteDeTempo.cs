@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 
 public class GerenteDeTempo : MonoBehaviour
 {
@@ -13,11 +14,14 @@ public class GerenteDeTempo : MonoBehaviour
     [SerializeField] private Rigidbody2D player;
     private static List<Vector3> positions = new List<Vector3>();
 
+    public Slider slidertempo;
+
     void FixedUpdate()  // Contador diminui e se ele passa de zero e o jogador não está voltando no tempo, ele inicia a volta no tempo
     {
         if (contadorTempo > 0)
         {
             contadorTempo -= Time.fixedDeltaTime;
+            slidertempo.value = contadorTempo;
         }
         else if (!estaVoltandoNoTempo)
         {
@@ -94,5 +98,8 @@ public class GerenteDeTempo : MonoBehaviour
     public void AumentarTempoGravado(float tempo)   // Aumenta o tempo gravado (chamado do jogador quando colide com os fragmentos de tempo)
     {
         tempoGravado += tempo;
+        contadorTempo += tempo;
+        slidertempo.maxValue = tempoGravado;
+        slidertempo.value = contadorTempo;
     }
 }
